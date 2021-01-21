@@ -1,25 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { useDispatch, useSelector } from 'react-redux'
 function App() {
+  const dispatch = useDispatch()
+  const { counter, content } = useSelector(store => store)
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="component">
+      <h1>APP</h1>
+      <h2>{counter}</h2>
+      <button onClick={() => dispatch({ type: 'INC' })}>INCREMENT</button>
+      <button onClick={() => dispatch({ type: 'DEC' })}>DECREMENT</button>
+      <button onClick={() => dispatch({ type: 'FETCH_ON_API', payload: counter })}>FETCH</button>
+      <div>
+        <ol>
+          {content.map(item => <li key={item.id}>{item.label}</li>)}
+        </ol>
+      </div>
     </div>
   );
 }
-
 export default App;
